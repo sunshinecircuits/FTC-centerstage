@@ -1,0 +1,170 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
+//import com.qualcomm.robotcore.hardware.ColorSensor;
+//import com.qualcomm.robotcore.harware.CRServo;
+//import com.qualcomm.robotcore.harware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+
+@TeleOp
+public class PrecisionTeleOp extends LinearOpMode
+{
+    public DcMotor FRwheel;
+    public DcMotor FLwheel;
+    public DcMotor BRwheel;
+    public DcMotor BLwheel;
+    public CRServo epicservo;
+    public CRServo SNTH;
+    public double handicap=0.25;
+    
+    @Override   
+    public void runOpMode()
+    {
+        FRwheel = hardwareMap.get(DcMotor.class,"FRMotor");
+        FLwheel = hardwareMap.get(DcMotor.class,"FLMotor");
+        BRwheel = hardwareMap.get(DcMotor.class,"BRMotor");
+        BLwheel = hardwareMap.get(DcMotor.class,"BLMotor");
+        epicservo = hardwareMap.get(CRServo.class, "EpicServo");
+        SNTH = hardwareMap.get(CRServo.class, "Suffer not the heretic");
+        telemetry.addData("Status","Intialized");
+        telemetry.update();
+        
+        
+        waitForStart();
+        while(opModeIsActive())
+        {
+            telemetry.addData("Status","Running");
+            telemetry.addData("Heresy Levels",0);
+            telemetry.update();
+            //Motors
+            double FRtargetpow=0;
+            double FLtargetpow=0;
+            double BRtargetpow=0;
+            double BLtargetpow=0;
+            double EStargetpow=0;
+            double SNTHtp=0;
+            /*
+            FRtargetpow=gamepad1.right_stick_y;
+            FRwheel.setPower(handicap*FRtargetpow);
+            telemetry.addData("Front Right TP", FRtargetpow);
+            telemetry.addData("Front Right CP", FRwheel.getPower());
+            FLtargetpow=-gamepad1.left_stick_y;
+            FLwheel.setPower(handicap*FLtargetpow);
+            telemetry.addData("Front Left TP", FLtargetpow);
+            telemetry.addData("Front Left CP", FLwheel.getPower());
+            BRtargetpow=gamepad1.right_stick_y;
+            BRwheel.setPower(handicap*BRtargetpow);
+            telemetry.addData("Back Right TP", BRtargetpow);
+            telemetry.addData("Back Right CP", BRwheel.getPower());
+            BLtargetpow=-gamepad1.left_stick_y;
+            BLwheel.setPower(handicap*BLtargetpow);
+            telemetry.addData("Back Left TP", BLtargetpow);
+            telemetry.addData("Back Left CP", BLwheel.getPower());
+            */
+            //movement for forward and back
+            FRtargetpow=-gamepad1.left_stick_y;
+            FRwheel.setPower(handicap*FRtargetpow);
+            telemetry.addData("Front Right TP", FRtargetpow);
+            telemetry.addData("Front Right CP", FRwheel.getPower());
+            FLtargetpow=gamepad1.left_stick_y;
+            FLwheel.setPower(handicap*FLtargetpow);
+            telemetry.addData("Front Left TP", FLtargetpow);
+            telemetry.addData("Front Left CP", FLwheel.getPower());
+            BRtargetpow=-gamepad1.left_stick_y;
+            BRwheel.setPower(handicap*BRtargetpow);
+            telemetry.addData("Back Right TP", BRtargetpow);
+            telemetry.addData("Back Right CP", BRwheel.getPower());
+            BLtargetpow=gamepad1.left_stick_y;
+            BLwheel.setPower(handicap*BLtargetpow);
+            telemetry.addData("Back Left TP", BLtargetpow);
+            telemetry.addData("Back Left CP", BLwheel.getPower());
+            
+            //movement for left and right 
+            FRtargetpow=gamepad1.left_stick_x;
+            FRwheel.setPower(handicap*FRtargetpow);
+            telemetry.addData("Front Right TP", FRtargetpow);
+            telemetry.addData("Front Right CP", FRwheel.getPower());
+            FLtargetpow=gamepad1.left_stick_x;
+            FLwheel.setPower(handicap*FLtargetpow);
+            telemetry.addData("Front Left TP", FLtargetpow);
+            telemetry.addData("Front Left CP", FLwheel.getPower());
+            BRtargetpow=-gamepad1.left_stick_x;
+            BRwheel.setPower(handicap*BRtargetpow);
+            telemetry.addData("Back Right TP", BRtargetpow);
+            telemetry.addData("Back Right CP", BRwheel.getPower());
+            BLtargetpow=-gamepad1.left_stick_x;
+            BLwheel.setPower(handicap*BLtargetpow);
+            telemetry.addData("Back Left TP", BLtargetpow);
+            telemetry.addData("Back Left CP", BLwheel.getPower());
+            
+            
+            //movement - rotation!!
+            FRtargetpow=gamepad1.right_stick_x;
+            FRwheel.setPower(handicap*FRtargetpow);
+            telemetry.addData("Front Right TP", FRtargetpow);
+            telemetry.addData("Front Right CP", FRwheel.getPower());
+            FLtargetpow=gamepad1.right_stick_x;
+            FLwheel.setPower(handicap*FLtargetpow);
+            telemetry.addData("Front Left TP", FLtargetpow);
+            telemetry.addData("Front Left CP", FLwheel.getPower());
+            BRtargetpow=gamepad1.right_stick_x;
+            BRwheel.setPower(handicap*BRtargetpow);
+            telemetry.addData("Back Right TP", BRtargetpow);
+            telemetry.addData("Back Right CP", BRwheel.getPower());
+            BLtargetpow=gamepad1.right_stick_x;
+            BLwheel.setPower(handicap*BLtargetpow);
+            telemetry.addData("Back Left TP", BLtargetpow);
+            telemetry.addData("Back Left CP", BLwheel.getPower());
+            
+            //servo testing yay slay
+            if (gamepad1.b==true)
+            {
+                EStargetpow=1;
+            }
+            else if (gamepad1.y==true)
+            {
+                EStargetpow=-1;
+            }
+            else
+            {
+                EStargetpow=0;
+            }
+            epicservo.setPower(handicap*EStargetpow);
+            telemetry.addData("servo TP", EStargetpow);
+            telemetry.addData("servo CP", epicservo.getPower());
+            
+            //THE HERETICS MUST BE PURGED FROM THE EXPANSION HUB
+            if (gamepad1.a==true)
+            {
+                SNTHtp=1;
+            }
+            else if (gamepad1.x==true)
+            {
+                SNTHtp=-1;
+            }
+            else
+            {
+                SNTHtp=0;
+            }
+            SNTH.setPower(handicap*SNTHtp);
+            telemetry.addData("servo1 TP", SNTHtp);
+            telemetry.addData("servo1 CP", SNTH.getPower());
+            
+            if (gamepad1.right_trigger>=0.5){
+                handicap=handicap*2;
+                while (gamepad1.right_trigger>=0.5){
+                    
+                }
+            }else if (gamepad1.left_trigger>=0.5){
+                handicap=handicap/2;
+                while (gamepad1.left_trigger>=0.5){
+                    
+                }
+            }
+        }
+    }
+}
+
