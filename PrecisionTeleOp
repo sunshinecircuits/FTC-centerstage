@@ -2,9 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
-//import com.qualcomm.robotcore.hardware.ColorSensor;
-//import com.qualcomm.robotcore.harware.CRServo;
-//import com.qualcomm.robotcore.harware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -18,7 +15,7 @@ public class PrecisionTeleOp extends LinearOpMode
     public DcMotor BLwheel;
     public CRServo epicservo;
     public CRServo SNTH;
-    public double handicap=0.25;
+    public double handicap=0.5;
     
     @Override   
     public void runOpMode()
@@ -30,6 +27,7 @@ public class PrecisionTeleOp extends LinearOpMode
         epicservo = hardwareMap.get(CRServo.class, "EpicServo");
         SNTH = hardwareMap.get(CRServo.class, "Suffer not the heretic");
         telemetry.addData("Status","Intialized");
+        telemetry.addData("Handicap",handicap);
         telemetry.update();
         
         
@@ -154,17 +152,21 @@ public class PrecisionTeleOp extends LinearOpMode
             telemetry.addData("servo1 CP", SNTH.getPower());
             
             if (gamepad1.right_trigger>=0.5){
-                handicap=handicap*2;
+                if (handicap<1){
+                    handicap=handicap+0.1;
+                }
                 while (gamepad1.right_trigger>=0.5){
                     
                 }
             }else if (gamepad1.left_trigger>=0.5){
-                handicap=handicap/2;
+                if (handicap>0.1){
+                    handicap=handicap-0.1;
+                }
                 while (gamepad1.left_trigger>=0.5){
                     
                 }
             }
+            telemetry.addData("Handicap",handicap);
         }
     }
 }
-
