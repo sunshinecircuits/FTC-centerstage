@@ -1,7 +1,6 @@
 /*
 DEPRECATED
 DO NOT USE
-
 */
 
 package org.firstinspires.ftc.teamcode;
