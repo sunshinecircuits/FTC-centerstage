@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ServoController;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -13,9 +15,9 @@ public class PrecisionTeleOp extends LinearOpMode
     public DcMotor FLwheel;
     public DcMotor BRwheel;
     public DcMotor BLwheel;
-    public CRServo epicservo;
-    public CRServo SNTH;
-    public double handicap=0.5;
+    public Servo epicservo;
+    public Servo SNTH;
+    public double handicap=1.0;
     
     @Override   
     public void runOpMode()
@@ -24,11 +26,15 @@ public class PrecisionTeleOp extends LinearOpMode
         FLwheel = hardwareMap.get(DcMotor.class,"FLMotor");
         BRwheel = hardwareMap.get(DcMotor.class,"BRMotor");
         BLwheel = hardwareMap.get(DcMotor.class,"BLMotor");
-        epicservo = hardwareMap.get(CRServo.class, "EpicServo");
-        SNTH = hardwareMap.get(CRServo.class, "Suffer not the heretic");
+        epicservo = hardwareMap.get(Servo.class, "EpicServo");
+        SNTH = hardwareMap.get(Servo.class, "Suffer not the heretic");
+        epicservo.setDirection(Servo.Direction.FORWARD);
+        SNTH.setDirection(Servo.Direction.FORWARD);
         telemetry.addData("Status","Intialized");
         telemetry.addData("Handicap",handicap);
         telemetry.update();
+        ServoController controller = epicservo.getController();
+        controller.pwmEnable();
         
         
         waitForStart();
@@ -42,8 +48,9 @@ public class PrecisionTeleOp extends LinearOpMode
             double FLtargetpow=0;
             double BRtargetpow=0;
             double BLtargetpow=0;
-            double EStargetpow=0;
-            double SNTHtp=0;
+            double EStargetpos=0;
+            //double SNTHtp=0;
+            
             /*
             FRtargetpow=gamepad1.right_stick_y;
             FRwheel.setPower(handicap*FRtargetpow);
@@ -63,7 +70,7 @@ public class PrecisionTeleOp extends LinearOpMode
             telemetry.addData("Back Left CP", BLwheel.getPower());
             */
             //movement for forward and back
-            FRtargetpow=-gamepad1.left_stick_y;
+            FRtargetpow=gamepad1.left_stick_y;
             FRwheel.setPower(handicap*FRtargetpow);
             telemetry.addData("Front Right TP", FRtargetpow);
             telemetry.addData("Front Right CP", FRwheel.getPower());
@@ -71,11 +78,11 @@ public class PrecisionTeleOp extends LinearOpMode
             FLwheel.setPower(handicap*FLtargetpow);
             telemetry.addData("Front Left TP", FLtargetpow);
             telemetry.addData("Front Left CP", FLwheel.getPower());
-            BRtargetpow=-gamepad1.left_stick_y;
+            BRtargetpow=gamepad1.left_stick_y;
             BRwheel.setPower(handicap*BRtargetpow);
             telemetry.addData("Back Right TP", BRtargetpow);
             telemetry.addData("Back Right CP", BRwheel.getPower());
-            BLtargetpow=gamepad1.left_stick_y;
+            BLtargetpow=-gamepad1.left_stick_y;
             BLwheel.setPower(handicap*BLtargetpow);
             telemetry.addData("Back Left TP", BLtargetpow);
             telemetry.addData("Back Left CP", BLwheel.getPower());
@@ -85,7 +92,7 @@ public class PrecisionTeleOp extends LinearOpMode
             FRwheel.setPower(handicap*FRtargetpow);
             telemetry.addData("Front Right TP", FRtargetpow);
             telemetry.addData("Front Right CP", FRwheel.getPower());
-            FLtargetpow=gamepad1.left_stick_x;
+            FLtargetpow=-gamepad1.left_stick_x;
             FLwheel.setPower(handicap*FLtargetpow);
             telemetry.addData("Front Left TP", FLtargetpow);
             telemetry.addData("Front Left CP", FLwheel.getPower());
@@ -104,7 +111,7 @@ public class PrecisionTeleOp extends LinearOpMode
             FRwheel.setPower(handicap*FRtargetpow);
             telemetry.addData("Front Right TP", FRtargetpow);
             telemetry.addData("Front Right CP", FRwheel.getPower());
-            FLtargetpow=gamepad1.right_stick_x;
+            FLtargetpow=-gamepad1.right_stick_x;
             FLwheel.setPower(handicap*FLtargetpow);
             telemetry.addData("Front Left TP", FLtargetpow);
             telemetry.addData("Front Left CP", FLwheel.getPower());
@@ -117,40 +124,41 @@ public class PrecisionTeleOp extends LinearOpMode
             telemetry.addData("Back Left TP", BLtargetpow);
             telemetry.addData("Back Left CP", BLwheel.getPower());
             
-            //servo testing yay slay
+            //servo testing
             if (gamepad1.b==true)
             {
-                EStargetpow=1;
+                EStargetpos=0.1;
+                epicservo.setPosition(EStargetpos);
+                controller.setServoPosition(0,EStargetpos);
             }
             else if (gamepad1.y==true)
             {
-                EStargetpow=-1;
+                EStargetpos=1;
+                epicservo.setPosition(EStargetpos);
+                controller.setServoPosition(0,EStargetpos);
             }
-            else
-            {
-                EStargetpow=0;
-            }
-            epicservo.setPower(handicap*EStargetpow);
-            telemetry.addData("servo TP", EStargetpow);
-            telemetry.addData("servo CP", epicservo.getPower());
+            //epicservo.setPosition(EStargetpos);
+            telemetry.addData("servo TP", EStargetpos);
+            telemetry.addData("servo CP", epicservo.getPosition());
+            
             
             //THE HERETICS MUST BE PURGED FROM THE EXPANSION HUB
+            
             if (gamepad1.a==true)
             {
-                SNTHtp=1;
+                SNTH.setPosition(1);
             }
             else if (gamepad1.x==true)
             {
-                SNTHtp=-1;
-            }
-            else
+                SNTH.setPosition(0);
+            }else
             {
-                SNTHtp=0;
+                SNTH.setPosition(0.5);
             }
-            SNTH.setPower(handicap*SNTHtp);
-            telemetry.addData("servo1 TP", SNTHtp);
-            telemetry.addData("servo1 CP", SNTH.getPower());
-            
+            //SNTH.setPower(handicap*SNTHtp);
+            //telemetry.addData("servo1 TP", SNTHtp);
+            //telemetry.addData("servo1 CP", SNTH.getPower());
+            //*/
             if (gamepad1.right_trigger>=0.5){
                 if (handicap<1){
                     handicap=handicap+0.1;
@@ -167,6 +175,10 @@ public class PrecisionTeleOp extends LinearOpMode
                 }
             }
             telemetry.addData("Handicap",handicap);
+            
         }
     }
 }
+
+
+
