@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.hardware.Blinker;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@Autonomous(name="BFrontstage")
+@Autonomous(name="BBackstage")
 
-public class BFrontstage extends LinearOpMode{
+public class BBackstage extends LinearOpMode{
     private DcMotor BLMotor;
     private DcMotor BRMotor;
     private Blinker control_Hub;
@@ -96,7 +96,7 @@ public class BFrontstage extends LinearOpMode{
         telemetry.addData("Power","Zero");
         telemetry.update();
     }
-//*    
+//    
     public void servy(double pos, int sleeper){
         epicServo.setPosition(pos);
         
@@ -113,7 +113,7 @@ public class BFrontstage extends LinearOpMode{
         BLMotor = hardwareMap.get(DcMotor.class,"BLMotor");
         telemetry.addData("Motors","Got");
         telemetry.update();
-       epicServo = hardwareMap.get(Servo.class, "EpicServo");
+        epicServo = hardwareMap.get(Servo.class, "EpicServo");
         
         waitForStart();
         if (opModeIsActive())
@@ -125,20 +125,21 @@ public class BFrontstage extends LinearOpMode{
             */
             telemetry.addData("FirstMove","Going");
             telemetry.update();
+            // 
+            //Perfect numbers
+            driver(-2750,2750,2750,-2750,0.25,"one");
             
-            driver(-150,150,150,-150,0.25,"one");
+            driver(200,-200,-200,200,0.25,"one");
             
-            driver(1800,1800,1800,1800,0.25,"two");
+            driver(3800,3800,3800,3800,0.5,"one");
             
             servy(1,1000);
             servy(0,500);
             
-            driver(-100,-100,-100,-100,0.25,"three");
-            
+            driver(-100,-100,-100,-100,0.25,"one");
             telemetry.addData("Moves","Done");
             telemetry.update();
             // RESET
         }
     }    
 }
-
