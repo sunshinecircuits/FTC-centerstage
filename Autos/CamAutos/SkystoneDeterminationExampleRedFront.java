@@ -183,7 +183,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
         void inputToCb(Mat input)
         {
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
-            Core.extractChannel(YCrCb, Cb, 1);
+            Core.extractChannel(YCrCb, Cb, 1); //This is labeled blue but it's really red don't question it it just works
         }
 
         @Override
@@ -365,7 +365,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
         /*
          * Call this from the OpMode thread to obtain the latest analysis
          */
-        public SkystonePosition getAnalysis()
+        public String getAnalysis()
         {
             /*
              * Find the max of the 3 averages
@@ -376,6 +376,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
              * Now that we found the max, we actually need to go and
              * figure out which sample region that value was from
              */
+
             if(maximum == avg1) // Was it from region 1?
             {
                 pos = "LEFT"; // Record our analysis
@@ -388,7 +389,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
             {
                 pos = "RIGHT"; // Record our analysis
             }
-            return position;
+            return pos;
         }
     }
 }

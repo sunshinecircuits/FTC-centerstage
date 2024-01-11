@@ -29,6 +29,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -46,7 +47,6 @@ import org.openftc.easyopencv.OpenCvWebcam;
  {
      OpenCvWebcam webcam;
      SkystoneDeterminationExampleRedFront.SkystoneDeterminationPipeline pipeline;
-     SkystoneDeterminationExampleRedFront.SkystoneDeterminationPipeline.SkystonePosition snapshotAnalysis = SkystoneDeterminationExampleRedFront.SkystoneDeterminationPipeline.SkystonePosition.LEFT; // default
 
      private DcMotor BLMotor;
      private DcMotor BRMotor;
@@ -55,7 +55,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
      private DcMotor FLMotor;
      private DcMotor FRMotor;
      public DcMotor Intake;
-
+     public String PosString;
      private IMU imu;
      //    @Override
      public void driver(int FR, int FL, int BR, int BL, double pow, String telem){
@@ -222,7 +222,11 @@ import org.openftc.easyopencv.OpenCvWebcam;
          /*
           * Show that snapshot on the telemetry
           */
-         telemetry.addData("Snapshot post-START analysis", snapshotAnalysis);
+         telemetry.addData("Pos", PosString);
+         telemetry.addData("Analysis", pipeline.getAnalysis());
+         telemetry.addData("AVG1", pipeline.avg1);
+         telemetry.addData("AVG2", pipeline.avg2);
+         telemetry.addData("AVG3", pipeline.avg3);
          telemetry.update();
 
          /*
@@ -257,8 +261,16 @@ import org.openftc.easyopencv.OpenCvWebcam;
          }
          //*/
 
+
+         PosString = pipeline.getAnalysis();
+         telemetry.addData("Pos", SkystoneDeterminationExampleRedFront.pos);
+         telemetry.addData("PosString", PosString);
+         telemetry.addData("Analysis", pipeline.getAnalysis());
+         telemetry.addData("AVG1", pipeline.avg1);
+         telemetry.addData("AVG2", pipeline.avg2);
+         telemetry.addData("AVG3", pipeline.avg3);
+         telemetry.update();
          waitForStart();
-         snapshotAnalysis = pipeline.getAnalysis();
          if (opModeIsActive())
          {
             /* These values determine how far things go
@@ -266,6 +278,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
             Sideways: Approx 10.5-11=500
             Rotation: Almost exactly 90 degrees=925
             */
+
              telemetry.addData("FirstMove","Going");
              telemetry.update();
              String pos=SkystoneDeterminationExampleRedFront.pos;
@@ -278,6 +291,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
                  driver(70,-70,-70,70,0.25, "six");//right to go to the backboard
                  driver(-1700,-1700,-1700,-1700,0.2, "seven");
                  servy(-1,1200, "eight");
+
                  servy(1,1200, "nine");
                  driver(200,200,200,200,0.5, "nine");//front
                  driver(1200,-1200,-1200,1200,0.75, "ten");//left
