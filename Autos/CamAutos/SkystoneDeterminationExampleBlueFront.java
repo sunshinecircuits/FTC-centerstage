@@ -42,7 +42,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
  * the sample regions over the first 3 stones.
  */
 @TeleOp
-public class SkystoneDeterminationExampleRedFront extends LinearOpMode
+public class SkystoneDeterminationExampleBlueFront extends LinearOpMode
 {
     OpenCvInternalCamera phoneCam;
     SkystoneDeterminationPipeline pipeline;
@@ -124,11 +124,10 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
          * The core values which define the location and size of the sample regions
          */
         static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(5,65);
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(200,235);
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(495,265);
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(115,235);
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(425,265);
         static final int REGION_WIDTH = 70;
         static final int REGION_HEIGHT = 70;
-
 
         /*
          * Points which actually define the sample region rectangles, derived from above values
@@ -184,7 +183,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
         void inputToCb(Mat input)
         {
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
-            Core.extractChannel(YCrCb, Cb, 1); //This is labeled blue but it's really red don't question it it just works
+            Core.extractChannel(YCrCb, Cb, 2); //This is labeled blue and it is
         }
 
         @Override
@@ -261,7 +260,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
              * pixel value of the 3-channel image, and referenced the value
              * at index 2 here.
              */
-            avg1 = 140;
+            avg1 = 143;
             avg2 = (int) Core.mean(region2_Cb).val[0];
             avg3 = (int) Core.mean(region3_Cb).val[0];
 
@@ -382,7 +381,7 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
             {
                 pos = "LEFT"; // Record our analysis
             }
-            else if(maximum == avg2) // Was it from region 2
+            else if(maximum == avg2) // Was it from region 2?
             {
                 pos = "CENTER"; // Record our analysis
             }
@@ -390,7 +389,6 @@ public class SkystoneDeterminationExampleRedFront extends LinearOpMode
             {
                 pos = "RIGHT"; // Record our analysis
             }
-
             return pos;
         }
     }

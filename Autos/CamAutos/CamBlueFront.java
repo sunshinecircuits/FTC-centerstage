@@ -1,40 +1,40 @@
  /*
- * Copyright (c) 2021 OpenFTC Team
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+  * Copyright (c) 2021 OpenFTC Team
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+  * in the Software without restriction, including without limitation the rights
+  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  * copies of the Software, and to permit persons to whom the Software is
+  * furnished to do so, subject to the following conditions:
+  *
+  * The above copyright notice and this permission notice shall be included in all
+  * copies or substantial portions of the Software.
+  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  * SOFTWARE.
+  */
 
-package org.firstinspires.ftc.teamcode.auto;
+ package org.firstinspires.ftc.teamcode.auto;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.Blinker;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
+ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+ import com.qualcomm.robotcore.hardware.Blinker;
+ import com.qualcomm.robotcore.hardware.DcMotor;
+ import com.qualcomm.robotcore.hardware.IMU;
+ import com.qualcomm.robotcore.hardware.Servo;
+ import com.qualcomm.robotcore.hardware.CRServo;
 
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvWebcam;
+ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+ import org.openftc.easyopencv.OpenCvCamera;
+ import org.openftc.easyopencv.OpenCvCameraFactory;
+ import org.openftc.easyopencv.OpenCvCameraRotation;
+ import org.openftc.easyopencv.OpenCvWebcam;
 
 
  /*x
@@ -42,11 +42,11 @@ import org.openftc.easyopencv.OpenCvWebcam;
   * and then snapshot that value for later use when the START
   * command is issued. The pipeline is re-used from SkystoneDeterminationExample
   */
- @Autonomous(name="RedFrontCamTest")
- public class CamRedFront extends LinearOpMode
+ @Autonomous(name="BlueFrontCamTest")
+ public class CamBlueFront extends LinearOpMode
  {
      OpenCvWebcam webcam;
-     SkystoneDeterminationExampleRedFront.SkystoneDeterminationPipeline pipeline;
+     SkystoneDeterminationExampleBlueFront.SkystoneDeterminationPipeline pipeline;
 
      private DcMotor BLMotor;
      private DcMotor BRMotor;
@@ -150,7 +150,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
          if (rev) {
              Mottargetpos = motor.getCurrentPosition() - (dist);
          }else{
-            Mottargetpos = motor.getCurrentPosition() + (dist);
+             Mottargetpos = motor.getCurrentPosition() + (dist);
          }
          motor.setTargetPosition(Mottargetpos);
          motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -197,7 +197,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
          int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
          webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam"), cameraMonitorViewId);
-         pipeline = new SkystoneDeterminationExampleRedFront.SkystoneDeterminationPipeline();
+         pipeline = new SkystoneDeterminationExampleBlueFront.SkystoneDeterminationPipeline();
          webcam.setPipeline(pipeline);
 
          webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
@@ -221,15 +221,15 @@ import org.openftc.easyopencv.OpenCvWebcam;
           * The START command just came in: snapshot the current analysis now
           * for later
           * We must do this because the analysis will continue*
-         * to change as the camera view changes once the robot starts moving!
-         */
+          * to change as the camera view changes once the robot starts moving!
+          */
 
          /*
           * Show that snapshot on the telemetry
           */
 
          PosString = pipeline.getAnalysis();
-         telemetry.addData("Pos", SkystoneDeterminationExampleRedFront.pos);
+         telemetry.addData("Pos", SkystoneDeterminationExampleBlueFront.pos);
          telemetry.addData("PosString", PosString);
          telemetry.addData("Analysis", pipeline.getAnalysis());
          telemetry.addData("AVG1", pipeline.avg1);
@@ -238,7 +238,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
          telemetry.update();
          waitForStart();
          PosString = pipeline.getAnalysis();
-         telemetry.addData("Pos", SkystoneDeterminationExampleRedFront.pos);
+         telemetry.addData("Pos", SkystoneDeterminationExampleBlueFront.pos);
          telemetry.addData("PosString", PosString);
          telemetry.addData("Analysis", pipeline.getAnalysis());
          telemetry.addData("AVG1", pipeline.avg1);
@@ -258,51 +258,54 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
              telemetry.addData("FirstMove","Going");
              telemetry.update();
-             String pos=SkystoneDeterminationExampleRedFront.pos;
+             String pos=SkystoneDeterminationExampleBlueFront.pos;
              if (pos.equals("LEFT")){
-                 driver(-150,150,150,-150,0.25,"Zero");
-                 driver(1250,1250,1250,1250,0.5,"one");
-                 driver(950,-950,950,-950,0.25,"two");//right
-                 driver(-100,-100,-100,-100,0.5,"10/4");
-                 Mot(Intake, 2000, true, 0.25, "three" );
-                 driver(225,225,225,225,0.25,"four");//Forward
-                 Mot(Intake, 100, true, 0.1, "Four-Point-Five" );
-                 driver(-325,-325,-325,-325,0.25, "five");
-                 driver(-150,150,150,-150,0.25, "six");//right to go to the backboard -st
-                 driver(-1500,-1500,-1500,-1500,0.2, "seven");
-                 servy(1,1200, "eight");
-                 servy(-1,1200, "nine");
-                 driver(200,200,200,200,0.5, "nine");//front
-                 driver(1500,-1500,-1500,1500,0.75, "ten");//left
-                 driver(-400,-400,-400,-400,0.5, "eleven");//back
-             } else if (pos.equals("CENTER")){
-                 driver(25,25,25,25,0.5,"idc");
-                 driver(-50,50,50,-50,0.5,"zero");
-                 driver(1000,1000,1000,1000,0.5,"one");
-                 driver(-200,200,200,-200,0.25,"two");
-                 Mot(Intake, 2000, true, 0.25, "three" );
-                 driver(205,205,205,205,0.25,"two");
-                 driver(-350,-350,-350,-350,0.75,"four");
-                 driver(920,-920, 920,-920,0.5,"five");
-                 driver(-1600,-1600,-1600,-1600,0.50, "six");
-                 driver(-250,250,250,-250,0.5, "six");
-                 servy(1,1200, "seven");
-                 servy(-1,1200, "eight");
-                 driver(200,200,200,200,0.5, "nine");//front
-                 driver(1100,-1100,-1100,1100,0.75, "ten");//left
-                 driver(-550,-550,-550,-550,0.75, "eleven");//back
-             } else if (pos.equals("RIGHT")){
-                 driver(-550,550,550,-550,0.5, "one");
+                 driver(700,-700,-700,700,0.5, "one");
                  driver(800,800,800,800,0.5, "two");
-                 Mot(Intake,2000,true,0.5,"three");
+                 Mot(Intake,2000,true,0.25,"three");
                  driver(-100,-100,-100,-100,0.5,"five");
-                 driver(925,-925,925,-925, 0.5, "six");
-                 driver(-1300,-1300,-1300,-1300, 0.25, "seven");
+                 driver(-925,925,-925,925, 0.5, "six");
+                 driver(-1225,-1225,-1225,-1225, 0.25, "seven");
+                 driver(200,-200,-200,200,0.5,"zero");//left st
                  servy(1,1200, "nine");
                  servy(-1,1200, "ten");
                  driver(200,200,200,200, 0.5, "eleven");
-                 driver(550,-550,-550,550, 0.5, "twelve");
+                 driver(-750,750,750,-750, 0.5, "twelve");
                  driver(-400,-400,-400,-400, 0.5, "thirteen");
+             } else if (pos.equals("CENTER")){
+                 driver(25,25,25,25,0.5,"idc");
+                 driver(50,-50,-50,50,0.5,"zero");//left st
+                 driver(1000,1000,1000,1000,0.5,"one");
+                 driver(200,-200,-200,200,0.25,"two");
+                 Mot(Intake, 2000, true, 0.25, "three" );
+                 driver(205,205,205,205,0.25,"two");
+                 Mot(Intake, 100, true, 0.1, "Four-Point-Five" );
+                 driver(-350,-350,-350,-350,0.75,"four");
+                 driver(-920,920, -920,920,0.5,"five");//rotate to face backboard
+                 driver(-1550,-1550,-1550,-1550,0.50, "six");//going back to back-board
+                 driver(300,-300,-300,300,0.5, "six");
+                 servy(1,1200, "seven");//servoarm
+                 servy(-1,1200, "eight");//servoarm
+                 driver(200,200,200,200,0.5, "nine");//front
+                 driver(-1100,1100,1100,-1100,0.75, "ten");//right
+                 driver(-550,-550,-550,-550,0.75, "eleven");//back
+             } else if (pos.equals("RIGHT")){
+                 driver(150,-150,-150,150,0.25,"Zero");
+                 driver(1250,1250,1250,1250,0.5,"one");
+                 driver(-950,950,-950,950,0.25,"two");
+                 driver(-100,-100,-100,-100,0.5,"10/4");
+                 Mot(Intake, 2000, true, 0.25, "three" );
+                 driver(225,225,225,225,0.25,"four");
+                 Mot(Intake, 100, true, 0.1, "Four-Point-Five" );
+                 driver(-325,-325,-325,-325,0.25, "five");
+                 //driver(-150,150,150,-150,0.25, "six");
+                 driver(-1500,-1500,-1500,-1500,0.25, "seven");
+                 driver(200,-200,-200,200,0.5,"ooo");
+                 servy(1,1200, "eight");
+                 servy(-1,1200, "nine");
+                 driver(200,200,200,200,0.5, "nine");
+                 driver(-1500,1500,1500,-1500,0.5, "ten");
+                 driver(-400,-400,-400,-400,0.5, "eleven");
              }
 
              telemetry.addData("Moves","Done");
