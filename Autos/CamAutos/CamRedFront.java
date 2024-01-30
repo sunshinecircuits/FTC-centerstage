@@ -268,7 +268,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
                  driver(225,225,225,225,0.25,"four");//Forward
                  Mot(Intake, 100, true, 0.1, "Four-Point-Five" );
                  driver(-325,-325,-325,-325,0.25, "five");
-                 driver(-150,150,150,-150,0.25, "six");//right to go to the backboard -st
+                 driver(-150,150,150,-150,0.25, "six");
                  driver(-1500,-1500,-1500,-1500,0.2, "seven");
                  servy(1,1200, "eight");
                  servy(-1,1200, "nine");
