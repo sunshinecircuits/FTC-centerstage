@@ -31,7 +31,7 @@ public class PrecisionTeleOp extends LinearOpMode
         BLwheel = hardwareMap.get(DcMotor.class,"BLMotor");
         InMotor = hardwareMap.get(DcMotor.class,"Intake");
         epicservo = hardwareMap.get(CRServo.class, "EpicServo");
-        SNTH = hardwareMap.get(CRServo.class, "Suffer not the heretic");
+        SNTH = hardwareMap.get(CRServo.class, "Otto");
         PIXplane = hardwareMap.get(CRServo.class, "Aero");
         //epicservo.setDirection(Servo.Direction.FORWARD);
         telemetry.addData("Status","Intialized");
@@ -45,7 +45,6 @@ public class PrecisionTeleOp extends LinearOpMode
         while(opModeIsActive())
         {
             telemetry.addData("Status","Running");
-            telemetry.addData("Heresy Levels",0);
             telemetry.update();
             //Motors
             double FRtargetpow=0;
