@@ -18,8 +18,10 @@ public class PrecisionTeleOp extends LinearOpMode
     public DcMotor BLwheel;
     public DcMotor InMotor;
     public CRServo epicservo;
-    public CRServo SNTH;
-    public CRServo PIXplane;
+    public CRServo DRONE;
+    public CRServo PIXback;
+    public CRServo PIXleft;
+    public CRServo PIXright;
     public double handicap=1.0;
 
     @Override
@@ -30,10 +32,10 @@ public class PrecisionTeleOp extends LinearOpMode
         BRwheel = hardwareMap.get(DcMotor.class,"BRMotor");
         BLwheel = hardwareMap.get(DcMotor.class,"BLMotor");
         InMotor = hardwareMap.get(DcMotor.class,"Intake");
-        epicservo = hardwareMap.get(CRServo.class, "EpicServo");
-        SNTH = hardwareMap.get(CRServo.class, "Otto");
-        PIXplane = hardwareMap.get(CRServo.class, "Aero");
-        //epicservo.setDirection(Servo.Direction.FORWARD);
+        DRONE = hardwareMap.get(CRServo.class, "Airplane");
+        PIXback = hardwareMap.get(CRServo.class, "PixelBack");
+        PIXleft = hardwareMap.get(CRServo.class, "PixelLeft");
+        PIXright = hardwareMap.get(CRServo.class, "PixelRight");
         telemetry.addData("Status","Intialized");
         telemetry.addData("Handicap",handicap);
         telemetry.update();
@@ -51,10 +53,9 @@ public class PrecisionTeleOp extends LinearOpMode
             double FLtargetpow=0;
             double BRtargetpow=0;
             double BLtargetpow=0;
-            double EStargetpos=0;
             double INtargetpow=0;
             double PIXtargetpos=0;
-            double SNTHtargetpow=0;
+            double DRONEtargetpow=0;
 
             /*
             FRtargetpow=gamepad1.right_stick_y;
@@ -130,24 +131,6 @@ public class PrecisionTeleOp extends LinearOpMode
             telemetry.addData("Back Left CP", BLwheel.getPower());
 
             //servo testing
-            if (gamepad1.b)
-            {
-                EStargetpos=-1;
-                epicservo.setPower(EStargetpos);
-                //controller.setServoPosition(0,EStargetpos);
-            }
-            else if (gamepad1.y)
-            {
-                EStargetpos=1;
-                epicservo.setPower(EStargetpos);
-                //controller.setServoPosition(0,EStargetpos);
-            }
-            //epicservo.setPosition(EStargetpos);
-            telemetry.addData("servo TP", EStargetpos);
-            //telemetry.addData("servo CP", epicservo.getPosition());
-
-
-            //THE HERETICS MUST BE PURGED FROM THE EXPANSION HUB
 
             if (gamepad2.a)
             {
@@ -168,10 +151,6 @@ public class PrecisionTeleOp extends LinearOpMode
             telemetry.addData("X stat", gamepad1.x);
             telemetry.addData("Intake power", InMotor.getPower());
 
-
-            //SNTH.setPower(handicap*SNTHtp);
-            //telemetry.addData("servo1 TP", SNTHtp);
-            //telemetry.addData("servo1 CP", SNTH.getPower());
             //*/
             if (gamepad1.right_trigger>=0.5){
                 if (handicap<1){
@@ -190,36 +169,35 @@ public class PrecisionTeleOp extends LinearOpMode
             }
             telemetry.addData("Handicap",handicap);
 
-            //Pixplane servo usage/testing
+            //Pixel servo 1 usage.
+            //(the back arm)
             if (gamepad2.b)
             {
-                PIXtargetpos=-1;
+                PIXbacktargetpos=-1;
             }
             else if (gamepad2.y)
             {
-                PIXtargetpos=1;
+                PIXbacktargetpos=1;
             } else{
-                PIXtargetpos=0;
+                PIXbacktargetpos=0;
             }
-            PIXplane.setPower(PIXtargetpos);
+            PIXback.setPower(PIXbacktargetpos);
             //epicservo.setPosition(EStargetpos); - may use later
-            telemetry.addData("PIXTP", PIXtargetpos);
+            telemetry.addData("PIXbackTP", PIXbacktargetpos);
 
 
-            //SUFFER NOT THE HERETIC TO LIVE!
             //(this is our airplane script)
             if ((gamepad2.right_trigger>=0.5))
             {
-                SNTHtargetpow=-1.;
+                DRONEtargetpow=-1.;
             } else if (gamepad2.left_trigger>=0.5) {
-                SNTHtargetpow=1;
+                DRONEtargetpow=1;
             }
             /* else{
-                SNTHtargetpow=0;
+                DRONEtargetpow=0;
             }*/
-            SNTH.setPower(SNTHtargetpow);
-            //epicservo.setPosition(EStargetpos); - may use later
-            telemetry.addData("SNTHTP", SNTHtargetpow);
+            DRONE.setPower(DRONEtargetpow);
+            telemetry.addData("DRONETP", DRONEtargetpow);
 
 
         }
