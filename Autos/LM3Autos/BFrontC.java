@@ -157,9 +157,9 @@ public class BFrontC extends LinearOpMode{
             driver(1200,1200,1200,1200,0.5,"one");
             driver(200,-200,-200,200,0.25,"two");
             driver(-925,925, -925,925,0.75,"five");
-            driver(-1600,-1600,-1600,-1600,0.25, "six");
-            servy(-1,1200, "seven");
-            servy(1,1200, "eight");
+            driver(-1450,-1450,-1450,-1450,0.25, "six");
+            servy(1,1200, "seven");
+            servy(-1,1200, "eight");
             driver(200,200,200,200,0.5, "nine");//front
             driver(-1100,1100,1100,-1100,0.75, "ten");//left
             driver(-1850,1850,-1850,1850,0.5,"eleven");//turning

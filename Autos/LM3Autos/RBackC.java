@@ -166,8 +166,8 @@ public class RBackC extends LinearOpMode{
             driver(-3800,-3800,-3800,-3800,0.5,"four");
             driver(1200,-1200,-1200,1200,0.5,"five");
             driver(-250,-250,-250,-250,0.25,"six");
-            servy(-1,1200,"seven");
-            servy(1,1200,"eight");
+            servy(1,1200,"seven");
+            servy(-1,1200,"eight");
             driver(200,200,200,200,0.5,"nine");//front
             driver(-1200,1200,1200,-1200,0.75,"ten");//right
             driver(-1850,1850,-1850,1850,0.5,"eleven");

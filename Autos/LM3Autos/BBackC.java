@@ -166,12 +166,12 @@ public class BBackC extends LinearOpMode{
             driver(-925,925,-925,925, 0.5 ,"three");
             driver(-3800,-3800,-3800,-3800,0.5,"four");
             driver(-800,800,800,-800,0.5,"five");
-            driver(-400,-400,-400,-400,0.25,"six");
-            servy(-1,1200,"seven");
-            servy(1,1200,"eight");
+            driver(-250,-250,-250,-250,0.25,"six");
+            servy(1,1200,"seven");
+            servy(-1,1200,"eight");
             driver(350,350,350,350,0.5,"nine");//front
-            driver(900,-900,-900,900,0.75,"ten");//right
-            driver(1850,-1850,1850,-1850,0.5,"eleven");
+            driver(925,-925,-925,925,0.75,"ten");//right
+            driver(1750,-1750,1750,-1750,0.5,"eleven");
             driver(200,200,200,200,0.25,"squigs");
             Mot(Intake, 2000, true, 1, "twelve");
             driver(-100,-100,-100,-100,1,"fourteen");
