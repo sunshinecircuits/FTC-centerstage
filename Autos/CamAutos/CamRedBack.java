@@ -238,7 +238,7 @@ package org.firstinspires.ftc.teamcode.auto;
             /* These values determine how far things go
             Forward: Approx 1ft =500
             Sideways: Approx 10.5-11=500
-            Rotation: Almost exactly 90 degrees=925
+            Rotation: Almost exactly 90 degre es=925
             */
 
              telemetry.addData("FirstMove","Going");
@@ -253,7 +253,6 @@ package org.firstinspires.ftc.teamcode.auto;
                  driver(70,-70,-70,70,0.25, "six");//right to go to the backboard
                  driver(-1700,-1700,-1700,-1700,0.2, "seven");
                  servy(-1,1200, "eight");
-
                  servy(1,1200, "nine");
                  driver(200,200,200,200,0.5, "nine");//front
                  driver(1200,-1200,-1200,1200,0.75, "ten");//left

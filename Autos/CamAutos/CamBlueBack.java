@@ -266,18 +266,20 @@ package org.firstinspires.ftc.teamcode.auto;
                  driver(1200,-1200,-1200,1200,0.75, "ten");//left
                  driver(-400,-400,-400,-400,0.5, "eleven");//back
              } else if (pos.equals("CENTER")){
-                 driver(1000,1000,1000,1000,0.5,"one");
-                 driver(-200,200,200,-200,0.25,"two");
-                 Mot(Intake, 2000, true, 0.5, "three" );
-                 driver(250,250,250,250,0.25,"two");
-                 driver(-400,-400,-400,-400,0.5,"four");
-                 driver(925,-925, 925,-925,0.75,"five");
-                 driver(-1700,-1700,-1700,-1700,0.25, "six");
-                 servy(-1,1200, "seven");
-                 servy(1,1200, "eight");
-                 driver(200,200,200,200,0.5, "nine");//front
-                 driver(750,-750,-750,750,0.75, "ten");//left
-                 driver(-400,-400,-400,-400,0.5, "eleven");//back
+                 driver(-300,300,300,-300,0.5,"one");
+                 driver(2200,2200,2200,2200,0.5,"two");
+                 driver(-925,925,-925,925, 0.5 ,"three");
+                 driver(-3800,-3800,-3800,-3800,0.5,"four");
+                 driver(-800,800,800,-800,0.5,"five");
+                 driver(-250,-250,-250,-250,0.25,"six");
+                 servy(1,1200,"seven");
+                 servy(-1,1200,"eight");
+                 driver(350,350,350,350,0.5,"nine");//front
+                 driver(925,-925,-925,925,0.75,"ten");//right
+                 driver(1750,-1750,1750,-1750,0.5,"eleven");
+                 driver(200,200,200,200,0.25,"squigs");
+                 Mot(Intake, 2000, true, 1, "twelve");
+                 driver(-100,-100,-100,-100,1,"fourteen");
              } else if (pos.equals("RIGHT")){
                  driver(-500,500,500,-500,0.5, "one");
                  driver(800,800,800,800,0.5, "two");

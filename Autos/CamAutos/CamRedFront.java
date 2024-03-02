@@ -261,17 +261,17 @@ import org.openftc.easyopencv.OpenCvWebcam;
              String pos=SkystoneDeterminationExampleRedFront.pos;
              if (pos.equals("LEFT")){
                  driver(-150,150,150,-150,0.25,"Zero");
-                 driver(1250,1250,1250,1250,0.5,"one");
+                 driver(1150,1150,1150,1150,0.5,"one");
                  driver(950,-950,950,-950,0.25,"two");//right
                  driver(-100,-100,-100,-100,0.5,"10/4");
-                 Mot(Intake, 2000, true, 0.25, "three" );
+                 Mot(Intake, 2000, true, 0.1, "three" );
                  driver(225,225,225,225,0.25,"four");//Forward
-                 Mot(Intake, 100, true, 0.1, "Four-Point-Five" );
+                 Mot(Intake, 100, true, 0.25, "Four-Point-Five" );
                  driver(-325,-325,-325,-325,0.25, "five");
-                 driver(-150,150,150,-150,0.25, "six");
-                 driver(-1500,-1500,-1500,-1500,0.2, "seven");
-                 servy(1,1200, "eight");
-                 servy(-1,1200, "nine");
+                 driver(-150,150,150,-150,0.25, "six");//right to go to the backboard -st
+                 driver(-1470,-1470,-1470,-1470,0.2, "seven");
+                 servy(1,1500, "eight");
+                 servy(-1,1500, "nine");
                  driver(200,200,200,200,0.5, "nine");//front
                  driver(1500,-1500,-1500,1500,0.75, "ten");//left
                  driver(-400,-400,-400,-400,0.5, "eleven");//back

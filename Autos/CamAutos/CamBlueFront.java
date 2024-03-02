@@ -260,18 +260,18 @@
              telemetry.update();
              String pos=SkystoneDeterminationExampleBlueFront.pos;
              if (pos.equals("LEFT")){
-                 driver(700,-700,-700,700,0.5, "one");
+                 driver(675,-675,-675,675,0.5, "one");
                  driver(800,800,800,800,0.5, "two");
-                 Mot(Intake,2000,true,0.25,"three");
-                 driver(-100,-100,-100,-100,0.5,"five");
-                 driver(-925,925,-925,925, 0.5, "six");
-                 driver(-1225,-1225,-1225,-1225, 0.25, "seven");
-                 driver(200,-200,-200,200,0.5,"zero");//left st
-                 servy(1,1200, "nine");
-                 servy(-1,1200, "ten");
-                 driver(200,200,200,200, 0.5, "eleven");
-                 driver(-750,750,750,-750, 0.5, "twelve");
-                 driver(-400,-400,-400,-400, 0.5, "thirteen");
+                 Mot(Intake,1500,true,0.6,"three");
+                 driver(-150,-150,-150,-150,0.55,"five");
+                 driver(-925,925,-925,925, 0.55, "six");
+                 driver(-1100,-1100,-1100,-1100, 0.55, "seven");
+                 driver(375,-375,-375,375,0.55,"zero");//left st
+                 servy(1,1000, "nine");
+                 servy(-1,1000, "ten");
+                 driver(200,200,200,200, 1, "eleven");
+                 driver(-900,900,900,-900, 1, "twelve");
+                 driver(-400,-400,-400,-400, 1, "thirteen");
              } else if (pos.equals("CENTER")){
                  driver(25,25,25,25,0.5,"idc");
                  driver(50,-50,-50,50,0.5,"zero");//left st
@@ -283,12 +283,12 @@
                  driver(-350,-350,-350,-350,0.75,"four");
                  driver(-920,920, -920,920,0.5,"five");//rotate to face backboard
                  driver(-1550,-1550,-1550,-1550,0.50, "six");//going back to back-board
-                 driver(300,-300,-300,300,0.5, "six");
+                 driver(350,-350,-350,350,0.5, "six");
                  servy(1,1200, "seven");//servoarm
                  servy(-1,1200, "eight");//servoarm
                  driver(200,200,200,200,0.5, "nine");//front
-                 driver(-1100,1100,1100,-1100,0.75, "ten");//right
-                 driver(-550,-550,-550,-550,0.75, "eleven");//back
+                 driver(-1150,1150,1150,-1150,0.75, "ten");//right
+                 driver(-575,-575,-575,-575,0.75, "eleven");//back
              } else if (pos.equals("RIGHT")){
                  driver(150,-150,-150,150,0.25,"Zero");
                  driver(1250,1250,1250,1250,0.5,"one");
@@ -300,11 +300,11 @@
                  driver(-325,-325,-325,-325,0.25, "five");
                  //driver(-150,150,150,-150,0.25, "six");
                  driver(-1500,-1500,-1500,-1500,0.25, "seven");
-                 driver(200,-200,-200,200,0.5,"ooo");
+                 driver(350,-350,-350,350,0.5,"ooo");
                  servy(1,1200, "eight");
                  servy(-1,1200, "nine");
                  driver(200,200,200,200,0.5, "nine");
-                 driver(-1500,1500,1500,-1500,0.5, "ten");
+                 driver(-1600,1600,1600,-1600,0.5, "ten");
                  driver(-400,-400,-400,-400,0.5, "eleven");
              }
 
